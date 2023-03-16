@@ -51,8 +51,7 @@ function App() {
 
     var columns = [
         {title: "id", field: "id", editable: "never"},
-        // {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.first_name} />  },
-        {title: "Descripcion", field: "description"},
+        {title: "Descripcion", field: "description", validate: rowData => rowData.description === '' ? 'Descripcion no puede estar vacio' : ''},
         {title: "Vigente", field: "isValid", type: 'boolean'},
         {title: "creacion", field: "createdAt", editable: "never"}
     ]
@@ -75,10 +74,7 @@ function App() {
         //validation
         let errorList = []
         if (newData.description === "") {
-            errorList.push("Please enter first name")
-        }
-        if (newData.isValid === "") {
-            errorList.push("Please enter last name")
+            errorList.push("escriba una descripcion")
         }
 
         dispatch(updateTask(newData)).then(d => dispatch(getTasks()))
